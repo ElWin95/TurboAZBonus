@@ -65,5 +65,14 @@ namespace ConsoleAppTurboAzBonus.Managers
             return this.GetEnumerator();
         }
 
+        public Model GetById(int id)
+        {
+            return Array.Find(data, item => item.Id == id);
+        }
+
+        public Model[] FindByName(string name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

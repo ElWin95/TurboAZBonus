@@ -4,11 +4,10 @@ using System.Collections;
 
 namespace ConsoleAppTurboAzBonus.Managers
 {
-    public class BrandManager : IManager<Brand>, IEnumerable<Brand>
+    public class CarManager : IManager<Car>, IEnumerable<Car>
     {
-        Brand[] data = new Brand[0];
-
-        public void Add(Brand item)
+        Car[] data = new Car[0];
+        public void Add(Car item)
         {
             int len = data.Length;
 
@@ -17,7 +16,7 @@ namespace ConsoleAppTurboAzBonus.Managers
             data[len] = item;
         }
 
-        public void Edit(Brand item)
+        public void Edit(Car item)
         {
             var index = Array.IndexOf(data, item);
 
@@ -26,10 +25,14 @@ namespace ConsoleAppTurboAzBonus.Managers
 
             var found = data[index];
 
-            found.Name = item.Name;
+            found.Year = item.Year;
+            found.ModelId = item.ModelId;
+            found.Transmission = item.Transmission;
+            found.Price = item.Price;
+            found.IsNew = item.IsNew;
         }
 
-        public void Remove(Brand item)
+        public void Remove(Car item)
         {
             int index = Array.IndexOf(data, item);
 
@@ -44,17 +47,9 @@ namespace ConsoleAppTurboAzBonus.Managers
             Array.Resize(ref data, len);
         }
 
-        public Brand this[int index] 
-        { 
-            get 
-            { 
-                return data[index]; 
-            } 
-        }
-
-        public IEnumerator<Brand> GetEnumerator()
+        public IEnumerator<Car> GetEnumerator()
         {
-            foreach (Brand item in data)
+            foreach (Car item in data)
             {
                 yield return item;
             }
@@ -65,14 +60,19 @@ namespace ConsoleAppTurboAzBonus.Managers
             return this.GetEnumerator();
         }
 
-        public Brand GetById(int id)
+        public Car GetById(int id)
         {
             return Array.Find(data, item => item.Id == id);
         }
 
-        public Brand[] FindByName(string name)
-        {
-            return Array.FindAll(data, item => item.Name.ToLower().StartsWith(name.ToLower()));
+      
+
+        public Car this[int index] 
+        { 
+            get 
+            {
+                return data[index];
+            } 
         }
     }
 }
